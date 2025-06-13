@@ -16,8 +16,6 @@ private:
 	Book* findByAuthor(string author);
 
 public:
-	BorrowManager borrow;
-
 	void addBook(const string& title, const string& author);
 	void displayAllBooks() const;
 	Book* getBookByTitle(string title);

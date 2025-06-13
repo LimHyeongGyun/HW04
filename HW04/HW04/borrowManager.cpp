@@ -66,7 +66,7 @@ void BorrowManager::returnBook(string title) {
 	}
 	//해당 책을 빌린적이 없다면
 	else if (b == borrowMap.end()) {
-		cout << "해당 이름의 책의 대여 내역이 없습니다. 이름을 다시 확인해주세요." << endl;
+		cout << "해당 이름의 책 대여 내역이 없습니다. 이름을 다시 확인해주세요." << endl;
 	}
 }
 

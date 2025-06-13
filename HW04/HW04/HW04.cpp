@@ -7,6 +7,7 @@ using namespace std;
 int main() {
 
     BookManager bookManager;
+    BorrowManager borrowManager;
 
     // 도서관 관리 프로그램의 기본 메뉴를 반복적으로 출력하여 사용자 입력을 처리합니다.
     // 프로그램 종료를 선택하기 전까지 계속 동작합니다.
@@ -37,6 +38,7 @@ int main() {
             getline(cin, author); // 저자명 입력 (공백 포함)\
 
             bookManager.addBook(title, author); // 입력받은 책 정보를 추가
+            borrowManager.initializeStock(Book(title, author), 3);
         }
         else if (choice == 2) {
             // 2번 선택: 모든 책 출력
@@ -51,7 +53,8 @@ int main() {
             cin.ignore();
             getline(cin, title);
 
-            cout << "찾으시는 책 정보" << bookManager.getBookByTitle(title);
+            Book* bookinfo = bookManager.getBookByTitle(title); //이렇게 출력하면 정상출력
+            cout << "[찾으시는 책 정보]" << "책 제목: " << bookinfo->title << "/ 작가: " << bookinfo->author << endl;
         }
         else if (choice == 4) {
             //4번 선택 : 작가로 책 검색
@@ -61,12 +64,13 @@ int main() {
             cin.ignore();
             getline(cin, author);
 
-            bookManager.getBookByAuthor(author);
+            Book* authorinfo = bookManager.getBookByAuthor(author); //이렇게 출력하면 정상출력
+            cout << "[찾으시는 작가 정보]" << "작가 이름: " << authorinfo->title << "/ 책 제목: " << authorinfo->author << endl;
         }
         else if (choice == 5) {
             //5번 선택 : 책 빌리기
             //빌릴 수 있는 책 확인
-            bookManager.borrow.displayStock();
+            borrowManager.displayStock();
 
             string title; //제목으로 검색
 
@@ -74,12 +78,12 @@ int main() {
             cin.ignore();
             getline(cin, title);
 
-            bookManager.borrow.borrowBook(title);
+            borrowManager.borrowBook(title);
         }
         else if (choice == 6) {
             //6번 선택 : 책 반납하기
             //반납할 책 리스트 확인
-            for (auto& pair : bookManager.borrow.borrowMap) {
+            for (auto& pair : borrowManager.borrowMap) {
                 cout << "빌린 책 이름: " << pair.first << "/" << "빌린 권 수: " << pair.second << endl;
             }
 
@@ -89,7 +93,7 @@ int main() {
             cin.ignore();
             getline(cin, title);
 
-            bookManager.borrow.returnBook(title);
+            borrowManager.returnBook(title);
         }
         else if (choice == 7) {
             // 8번 선택: 종료

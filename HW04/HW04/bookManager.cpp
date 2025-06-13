@@ -18,7 +18,6 @@ Book* BookManager::findByTitle(string title) {
 
 	for (auto& book : books) {
 		if (book.title == title) {
-			cout << "책 제목: " << book.title << "/" << " 작가 이름: " << book.author << endl;
 			return &book;
 		}
 	}
@@ -37,7 +36,6 @@ Book* BookManager::findByAuthor(string author) {
 
 	for (auto& book : books) {
 		if (book.author == author) {
-			cout << "책 제목: " << book.title << "/" << " 작가 이름: " << book.author << endl;
 			return &book;
 		}
 	}
@@ -54,8 +52,6 @@ void BookManager::addBook(const string& title, const string& author) {
 	
 	bookMap[title] = author;
 	authorMap[author] = title;
-
-	borrow.initializeStock(Book(title, author), 3);
 
 	cout << "책이 추가되었습니다: " << title << "by" << author << endl;
 }
